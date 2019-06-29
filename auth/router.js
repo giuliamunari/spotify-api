@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const { toJWT } = require('./jwt');
-const User = require('../user/model')
+const User = require('../users/model')
 const bcrypt = require('bcrypt');
 const auth = require('./middleware')
 
@@ -56,7 +56,7 @@ router.post('/tokens', (req, res, next) => {
     }
 })
 
-rrouter.get('/secret-endpoint', auth, (req, res) => {
+router.get('/secret-endpoint', auth, (req, res) => {
     res.send({
       message: `Thanks for visiting the secret endpoint ${req.user.email}.`,
     })

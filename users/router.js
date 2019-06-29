@@ -17,7 +17,7 @@ router.post('/users', (req, res, next) => {
             res
                 .status(201)
                 .json({
-                    message: "A NEW USER WAS ADDED - better not show that password...",
+                    message: "A NEW USER WAS ADDED",
                     "new user": user
                 })
         })
@@ -26,7 +26,7 @@ router.post('/users', (req, res, next) => {
 
 router.get('/users', function (req, res, next) {
     User.findAll()
-        .then(user => res.json({ user }))
+        .then(users => res.json({ users }))
         .catch(err => next(err))
 })
 

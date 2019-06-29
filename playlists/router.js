@@ -3,12 +3,11 @@ const Playlist = require('./model')
 const router = new Router()
 
 router.post('/playlists', function (request, response, next) {
-    const createPlaylist =
-        Playlist.create(request.body)
-            .then(playlists => response.status(201).json({ playlists }))
-            .catch(err => next(err))
-    if (request.body.name) return createPlaylist
-    return response.status(400).send({ message: 'The name of the playlist needs to be defined' })
+    if (!request.body.name) return response.status(400).send({ message: 'The name of the playlist needs to be defined' })
+    return Playlist
+        .create(request.body)
+        .then(playlists => response.status(201).json({ playlists }))
+        .catch(err => next(err))
 })
 
 router.get('/playlists', function (req, res) {

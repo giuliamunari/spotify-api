@@ -21,5 +21,5 @@ const Song = db.define(
         }
     }, 
     { timestamps: false, tableName: 'playlist_songs' })
-Song.belongsTo(Playlist)
+
 module.exports = Song

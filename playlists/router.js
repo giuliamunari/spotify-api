@@ -1,5 +1,6 @@
 const Router = require('express')
 const Playlist = require('./model')
+const Song = require('../songs/model');
 const router = new Router()
 
 router.post('/playlists', function (request, response, next) {
@@ -19,10 +20,11 @@ router.get('/playlists', function (req, res) {
         .catch(error => res.status(400).send(error))
 })
 
-router.get('/playlists/:id', function (req, res) {
+router.get('/playlists/:id', function (req, res) { 
     const id = req.params.id
-    Playlist.findByPk(id)
+    Playlist.findByPk(id, { include: [Song] })
         .then(playlist => {
+            console.log(playlist,'playlist')
             if (!playlist) return res.status(404).send({ message: 'Playlist Not Found' });
             return res.status(200).json({ playlist })
         })
